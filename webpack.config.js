@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProd = nodeEnv === 'production';
 
@@ -10,10 +9,10 @@ const plugins = [
       NODE_ENV: JSON.stringify(nodeEnv)
     }
   }),
-  new HtmlWebpackPlugin({
-    title: 'Typescript Webpack Starter',
-    template: '!!ejs-loader!src/index.html'
-  }),
+  // new HtmlWebpackPlugin({
+  //   title: 'Typescript Webpack Starter',
+  //   template: '!!ejs-loader!src/index.html'
+  // }),
   new webpack.LoaderOptionsPlugin({
     options: {
       tslint: {
@@ -28,11 +27,11 @@ var config = {
   devtool: isProd ? 'hidden-source-map' : 'source-map',
   context: path.resolve('./src'),
   entry: {
-    app: './index.ts'
+    index: './index.ts'
   },
   output: {
-    path: path.resolve('./dist'),
-    filename: '[name].bundle.js'
+    path: path.resolve('./lib'),
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -52,8 +51,8 @@ var config = {
             }
           }
         : null,
-      { test: /\.html$/, loader: 'html-loader' },
-      { test: /\.css$/, loaders: ['style-loader', 'css-loader'] }
+      // { test: /\.html$/, loader: 'html-loader' },
+      // { test: /\.css$/, loaders: ['style-loader', 'css-loader'] }
     ].filter(Boolean)
   },
   resolve: {
@@ -61,7 +60,7 @@ var config = {
   },
   plugins: plugins,
   devServer: {
-    contentBase: path.join(__dirname, 'dist/'),
+    contentBase: path.join(__dirname, 'lib/'),
     compress: true,
     port: 3000,
     hot: true
