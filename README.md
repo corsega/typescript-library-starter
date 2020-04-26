@@ -12,12 +12,6 @@ Test
 npm run test
 ```
 
-Coverage
-
-```
-npm run coverage
-```
-
 Build
 ```
 npm run build
